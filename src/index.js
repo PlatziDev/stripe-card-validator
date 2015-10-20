@@ -16,16 +16,8 @@ function checkPosition(character, position) {
   return this.indexOf(character) === position;
 }
 
-function checkLength(size) {
-  return this.length === size;
-}
-
 // American Express
 function checkIfAmericanExpress(number) {
-  if (!number::checkLength(15)) {
-    return false;
-  }
-
   const first = number::checkPosition('3', 0);
   const second = (
     number::checkPosition('4', 1) ||
@@ -41,10 +33,6 @@ function checkIfAmericanExpress(number) {
 
 // Visa
 function checkIfVisa(number) {
-  if (!number::checkLength(13) && !number::checkLength(16)) {
-    return false;
-  }
-
   if (number::checkPosition('4', 0)) {
     return true;
   }
@@ -54,10 +42,6 @@ function checkIfVisa(number) {
 
 // Master Card
 function checkIfMasterCard(number) {
-  if (!number::checkLength(16)) {
-    return false;
-  }
-
   const first = number::checkPosition('5', 0);
 
   const second = number[1] >= 1 && number[1] <= 5;
@@ -71,10 +55,6 @@ function checkIfMasterCard(number) {
 
 // Discover
 function checkIfDiscover(number) {
-  if (!number::checkLength(16)) {
-    return false;
-  }
-
   const firstEight = number.substring(0, 8);
 
   if (firstEight >= 60110000 && firstEight <= 60119999) {
@@ -94,10 +74,6 @@ function checkIfDiscover(number) {
 
 // Diners Club
 function checkIfDinersClub(number) {
-  if (!number::checkLength(14)) {
-    return false;
-  }
-
   const first = number::checkPosition('3', 0);
   const second = (
     number::checkPosition('0', 1) ||
@@ -114,10 +90,6 @@ function checkIfDinersClub(number) {
 
 // JCB
 function checkIfJcb(number) {
-  if (!number::checkLength(16)) {
-    return false;
-  }
-
   const firstFour = (
     number::checkPosition('3088', 0) ||
     number::checkPosition('3096', 0) ||
@@ -154,12 +126,12 @@ function validate(creditCardNumber) {
   //  Discover
   const isDiscover = checkIfDiscover(number);
   if (isDiscover) return 'discover';
-  // Diners Club or Carte Blanche
-  const isDinersClub = checkIfDinersClub(number);
-  if (isDinersClub) return 'diners club';
   // JCB
   const isJcb = checkIfJcb(number);
   if (isJcb) return 'jcb';
+  // Diners Club or Carte Blanche
+  const isDinersClub = checkIfDinersClub(number);
+  if (isDinersClub) return 'diners club';
 
   throw new Error('Invalid credit card number');
 }

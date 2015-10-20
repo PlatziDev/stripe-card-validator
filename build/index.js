@@ -21,16 +21,8 @@ function checkPosition(character, position) {
   return this.indexOf(character) === position;
 }
 
-function checkLength(size) {
-  return this.length === size;
-}
-
 // American Express
 function checkIfAmericanExpress(number) {
-  if (!checkLength.call(number, 15)) {
-    return false;
-  }
-
   var first = checkPosition.call(number, '3', 0);
   var second = checkPosition.call(number, '4', 1) || checkPosition.call(number, '7', 1);
 
@@ -43,10 +35,6 @@ function checkIfAmericanExpress(number) {
 
 // Visa
 function checkIfVisa(number) {
-  if (!checkLength.call(number, 13) && !checkLength.call(number, 16)) {
-    return false;
-  }
-
   if (checkPosition.call(number, '4', 0)) {
     return true;
   }
@@ -56,10 +44,6 @@ function checkIfVisa(number) {
 
 // Master Card
 function checkIfMasterCard(number) {
-  if (!checkLength.call(number, 16)) {
-    return false;
-  }
-
   var first = checkPosition.call(number, '5', 0);
 
   var second = number[1] >= 1 && number[1] <= 5;
@@ -73,10 +57,6 @@ function checkIfMasterCard(number) {
 
 // Discover
 function checkIfDiscover(number) {
-  if (!checkLength.call(number, 16)) {
-    return false;
-  }
-
   var firstEight = number.substring(0, 8);
 
   if (firstEight >= 60110000 && firstEight <= 60119999) {
@@ -96,10 +76,6 @@ function checkIfDiscover(number) {
 
 // Diners Club
 function checkIfDinersClub(number) {
-  if (!checkLength.call(number, 14)) {
-    return false;
-  }
-
   var first = checkPosition.call(number, '3', 0);
   var second = checkPosition.call(number, '0', 1) || checkPosition.call(number, '6', 1) || checkPosition.call(number, '8', 1);
 
@@ -112,10 +88,6 @@ function checkIfDinersClub(number) {
 
 // JCB
 function checkIfJcb(number) {
-  if (!checkLength.call(number, 16)) {
-    return false;
-  }
-
   var firstFour = checkPosition.call(number, '3088', 0) || checkPosition.call(number, '3096', 0) || checkPosition.call(number, '3112', 0) || checkPosition.call(number, '3158', 0) || checkPosition.call(number, '3337', 0);
 
   if (firstFour) {
@@ -146,12 +118,12 @@ function validate(creditCardNumber) {
   //  Discover
   var isDiscover = checkIfDiscover(number);
   if (isDiscover) return 'discover';
-  // Diners Club or Carte Blanche
-  var isDinersClub = checkIfDinersClub(number);
-  if (isDinersClub) return 'diners club';
   // JCB
   var isJcb = checkIfJcb(number);
   if (isJcb) return 'jcb';
+  // Diners Club or Carte Blanche
+  var isDinersClub = checkIfDinersClub(number);
+  if (isDinersClub) return 'diners club';
 
   throw new Error('Invalid credit card number');
 }
