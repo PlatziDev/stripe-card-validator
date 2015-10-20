@@ -1,0 +1,37 @@
+{
+  "name": "stripe-card-validator",
+  "version": "1.0.0",
+  "description": "Library to validate Stripe's supported credit cards",
+  "main": "build/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "babel src/index.js --out-file build/index.js",
+    "test": "mocha --compilers js:babel/register test/ --ui bdd --reporter spec -r test/helpers/setup -w -G",
+    "watch": "babel src/index.js --watch --out-file build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PlatziDev/stripe-card-validator.git"
+  },
+  "keywords": [
+    "credit",
+    "card",
+    "validation"
+  ],
+  "author": "Sergio Daniel Xalambrí <sergio@xalambri.com.ar> (https://sergio.xalambri.com.ar/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PlatziDev/stripe-card-validator/issues"
+  },
+  "homepage": "https://github.com/PlatziDev/stripe-card-validator#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.3",
+    "chai": "^3.3.0",
+    "chai-as-promised": "^5.1.0",
+    "eslint": "^1.7.2",
+    "mocha": "^2.3.3"
+  }
+}
